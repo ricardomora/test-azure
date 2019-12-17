@@ -19,7 +19,8 @@ const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
 
-const upload = multer({ dest: path.join(__dirname, 'uploads') });
+const fileFilter = require('./utils/fileFilter');
+const upload = multer({ dest: path.join(__dirname, 'uploads'), fileFilter });
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.

@@ -15,6 +15,7 @@ const axios = require('axios');
 const { google } = require('googleapis');
 const Quickbooks = require('node-quickbooks');
 const validator = require('validator');
+const fs = require('fs');
 
 Quickbooks.setOauthVersion('2.0');
 
@@ -661,12 +662,15 @@ exports.getLob = async (req, res, next) => {
 
 exports.getFileUpload = (req, res) => {
   res.render('api/upload', {
-    title: 'File Upload'
+    title: '(^ c ^)'
   });
 };
 
 exports.postFileUpload = (req, res) => {
-  req.flash('success', { msg: 'File was uploaded successfully.' });
+  let rawdata = fs.readFileSync(req.file.path);
+  let uploadedfile = JSON.parse(rawdata);
+  console.log(uploadedfile);
+  req.flash('success', { msg: ":)" });
   res.redirect('/api/upload');
 };
 
